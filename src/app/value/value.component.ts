@@ -12,7 +12,7 @@ export class ValueComponent implements OnInit {
   constructor(private http: HttpClient){}
 
   ngOnInit() {
-    this.getValues();
+    //this.getValues();
   }
   public getValues(): void {
     this.http.get<any>('http://localhost:5000/api/values')

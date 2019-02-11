@@ -18,7 +18,7 @@ export class NavComponent implements OnInit {
     //console.log(this.model);
     this.authServices.login(this.model).subscribe(
       next => {
-        console.log('Logged in successfully'); //onNext means subscribe successful
+        console.log('Logged in successfully, next is ' + JSON.stringify(next)); //onNext means subscribe successful
       },
       error => {
         console.log('Failed to Login'); //onError means Failed
@@ -26,4 +26,14 @@ export class NavComponent implements OnInit {
     );
   }
 
+  loggedIn(){
+    const token:string = localStorage.getItem('token');
+    return !!token; //return false if empty;
+  }
+
+  logout(x){
+    localStorage.removeItem('token');
+    this.model.password = '';
+    console.log('logged out' + x);
+  }
 }
