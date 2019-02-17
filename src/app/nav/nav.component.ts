@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import { AlertifyService } from '../_services/alertify.service';
+
 
 @Component({
   selector: 'app-nav',
@@ -8,8 +10,8 @@ import { AuthService } from '../_services/auth.service';
 })
 export class NavComponent implements OnInit {
   model:any = {};
-
-  constructor(private authServices:AuthService) { }
+  
+  constructor(public authServices:AuthService,private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
@@ -18,22 +20,27 @@ export class NavComponent implements OnInit {
     //console.log(this.model);
     this.authServices.login(this.model).subscribe(
       next => {
-        console.log('Logged in successfully, next is ' + JSON.stringify(next)); //onNext means subscribe successful
+        //console.log('Logged in successfully, next is ' + JSON.stringify(next)); //onNext means subscribe successful
+        this.alertify.success('Logged in successfully');
+        //this.alertify.
       },
       error => {
-        console.log('Failed to Login'); //onError means Failed
+        //console.log('Failed to Login'); //onError means Failed
+        this.alertify.error(error);
       }
     );
   }
 
-  loggedIn(){
-    const token:string = localStorage.getItem('token');
-    return !!token; //return false if empty;
+  loggedIn(): boolean{
+    //const token:string = localStorage.getItem('token');
+    //return !!token; //return false if empty;
+    return this.authServices.loggedIn();
   }
 
   logout(x){
     localStorage.removeItem('token');
     this.model.password = '';
-    console.log('logged out' + x);
+    //console.log('logged out' + x);
+    this.alertify.success('log out successfully');
   }
 }
