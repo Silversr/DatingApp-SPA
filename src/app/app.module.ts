@@ -16,6 +16,7 @@ import { ListsComponent } from './lists/lists.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { appRoutes } from './routes';
 import { MessagesDaComponent } from './messages-da/messages-da.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 
 
@@ -37,11 +38,13 @@ import { MessagesDaComponent } from './messages-da/messages-da.component';
     HttpClientModule,
     FormsModule,
     BsDropdownModule.forRoot(),
-    RouterModule.forRoot(appRoutes,{enableTracing:true})
+    //RouterModule.forRoot(appRoutes,{enableTracing: true})
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     AuthService,
-    AlertifyService
+    AlertifyService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
