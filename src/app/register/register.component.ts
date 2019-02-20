@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -30,7 +31,7 @@ export class RegisterComponent implements OnInit {
       },
       error => {
         //console.log('Failed to Register: ' + JSON.stringify(error)); //onError means Failed, what to do with an error
-        this.alertify.error(JSON.stringify(error));
+        this.alertify.error(JSON.stringify(error.status) + JSON.stringify(error.error));
       }
     );
   }
