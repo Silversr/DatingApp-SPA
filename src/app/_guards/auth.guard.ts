@@ -12,13 +12,11 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
    *
    */
   constructor(private authService: AuthService, private router: Router, private alertify: AlertifyService) {
-    //super();
-    
+    //super();    
   }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    
       if(this.authService.loggedIn()){
         return true;
       }
